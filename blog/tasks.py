@@ -10,9 +10,7 @@ def mark_featured():
     posts = Post.objects.all()
 
     if len(posts) > 0:
-        r = random.randint(0, len(posts)-1)
-
-        post = posts[r]
+        post = random.choice(posts)
         post.featured = True
         post.save()
 
