@@ -1,24 +1,13 @@
-<!DOCTYPE html>
-<html>
-<head lang="en">
-    <meta charset="UTF-8">
-    <title></title>
-</head>
-<body>
- <form class="accounts" method="post" action="{% url 'django.contrib.auth.views.login' %}">
-                {% csrf_token %}
-                <fieldset>
-                    <h2>Login</h2>
-                    {% if form.errors %}
-                        <ul class="errorlist"><li>Your username and password didn't match. Please try again.</li></ul>
-                    {% endif %}
-                    <label for="id_username">{{ form.username.label_tag }}</label>
-                    {{ form.username }}
-                    <label for="id_password">{{ form.password.label_tag }}</label>
-                    {{ form.password }}
-                    <input type="submit" value="Login" />
-                    <input type="hidden" name="next" value="{{ next }}" />
-                </fieldset>
-            </form>
-</body>
-</html>
+{% extends 'blog/base.html' %}
+
+{% block base_content%}
+<div class="container" ng-controller="IndexController">
+    <div ng-repeat="post in posts">
+        {% verbatim %}
+        <strong>{{ post.title }}</strong> - by {{ post.user }}
+        <p>{{ post.description }}</p>
+        {% endverbatim %}
+        <hr/>
+    </div>
+</div>
+{% endblock %}

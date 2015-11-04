@@ -38,6 +38,8 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'blog',
+    'rest_framework',
+    'djangular'
 )
 
 MIDDLEWARE_CLASSES = (
@@ -101,3 +103,52 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.8/howto/static-files/
 
 STATIC_URL = '/static/'
+
+REST_FRAMEWORK = {
+    # Use Django's standard `django.contrib.auth` permissions,
+    # or allow read-only access for unauthenticated users.
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework.authentication.BasicAuthentication',
+        'rest_framework.authentication.SessionAuthentication',
+    ),
+    'DEFAULT_PERMISSION_CLASSES': [
+        'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly'
+    ],
+    'DEFAULT_PARSER_CLASSES': (
+        'rest_framework.parsers.JSONParser',
+        'rest_framework_xml.parsers.XMLParser',
+    ),
+    'DEFAULT_RENDERER_CLASSES': (
+        'rest_framework.renderers.BrowsableAPIRenderer',
+        'rest_framework.renderers.JSONRenderer',
+        'rest_framework_xml.renderers.XMLRenderer'
+    ),
+}
+
+PIPELINE_CSS = {
+    'colors': {
+        'source_filenames': (
+          'css/core.css',
+          'css/colors/*.css',
+          'css/layers.css'
+        ),
+        'output_filename': 'css/colors.css',
+        'extra_context': {
+            'media': 'screen,projection',
+        },
+    },
+}
+
+PIPELINE_JS = {
+    'stats': {
+        'source_filenames': (
+          'js/jquery.js',
+          'js/d3.js',
+          'js/collections/*.js',
+          'js/application.js',
+        ),
+        'output_filename': 'js/stats.js',
+    }
+}
+
+LOGIN_REDIRECT_URL = '/'

@@ -15,9 +15,19 @@ Including another URLconf
 """
 from django.conf.urls import include, url
 from django.contrib import admin
+from django.views.generic import TemplateView
+from rest_framework import routers
+from blog import views
+
+router = routers.DefaultRouter()
+router.register(r'post', views.PostViewSet)
 
 urlpatterns = [
-    url
+    url(r'^post/add$', TemplateView.as_view(template_name='blog/add-post.html')),
+    url(r'^api/', include(router.urls)),
+    url(r'^$', TemplateView.as_view(template_name='blog/index.html'), name='index'),
     url(r'^admin/', include(admin.site.urls)),
+    url(r'^login$', 'django.contrib.auth.views.login'),
+    url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework')),
     url(r'^accounts/login/', 'django.contrib.auth.views.login', {'template_name': 'blog/index.html'}, name='login'),
 ]

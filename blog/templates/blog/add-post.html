@@ -1,0 +1,23 @@
+{% extends "blog/base.html" %}
+{% block base_content %}
+{% if user.is_authenticated %}
+<div ng-controller="NewPostController">
+    <div ng-show="!is_error && submitted" ng-class="alert-success">New post saved!</div>
+    <form ng-submit="processForm()">
+        <div>
+            <input type="text" name="title" ng-model="formData.title">
+            <span ng-bind="errors['title']"></span>
+        </div>
+        <div>
+            <textarea name="description" ng-model="formData.description"></textarea>
+            <span ng-bind="errors['description']"></span>
+        </div>
+        <div>
+            <input type="submit">
+        </div>
+    </form>
+</div>
+{% else %}
+    You are not logged in!
+{% endif %}
+{% endblock %}
