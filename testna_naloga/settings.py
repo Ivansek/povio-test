@@ -164,9 +164,14 @@ CELERYBEAT_SCHEDULE = {
         'schedule': timedelta(seconds=60)
     },
 }
+
 REDIS_URL="redis://"
+if 'REDIS_URL' in os.environ:
+    REDIS_URL = os.environ['REDIS_URL']
+
 BROKER_URL=REDIS_URL
 CELERY_RESULT_BACKEND=REDIS_URL
+
 CELERY_TIMEZONE = 'Europe/Ljubljana'
 
 # Parse database configuration from $DATABASE_URL
