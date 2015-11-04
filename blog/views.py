@@ -8,7 +8,7 @@ class PostViewSet(viewsets.ModelViewSet):
     """
     ViewSet for blog post
     """
-    queryset = Post.objects.all()
+    queryset = Post.objects.all().order_by('-id')
     serializer_class = PostSerializer
     authentication_classes = (SessionAuthentication, BasicAuthentication)
 

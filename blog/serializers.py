@@ -9,19 +9,15 @@ class UserSerializer(serializers.Serializer):
     """
     username = serializers.CharField(max_length=50)
 
-    # class Meta:
-    #     model = User
-    #     fields = ('id', 'username', 'email', 'first_name')
-    #     read_only_fields = ('__all__')
-
 class PostSerializer(serializers.ModelSerializer):
+    """
+    Serializer for blog post
+    """
     user = UserSerializer()
-    # user = serializers.PrimaryKeyRelatedField(queryset=User.objects.all())
 
     class Meta:
         model = Post
         fields = ('id', 'title', 'description', 'featured', 'user')
-        # read_only_fields = ('user')
 
     def create(self, validated_data):
         p = Post.objects.create(title=validated_data['title'],
@@ -29,7 +25,3 @@ class PostSerializer(serializers.ModelSerializer):
                                 user=User.objects.get(username=validated_data['user']['username'])
         )
         return p
-    #
-    # def to_internal_value(self, data):
-    #     data['user'] = UserSerializer(data['user']).data
-    #     return data
