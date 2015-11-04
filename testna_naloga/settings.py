@@ -186,3 +186,7 @@ LOGGING = {
         },
     }
 }
+
+ADMINS = (
+    ('Simon Ivansek', 'simon.ivansek@gmail.com')
+)
