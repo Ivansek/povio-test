@@ -8,5 +8,6 @@ class Post(models.Model):
     title = models.CharField(max_length=50)
     description = models.TextField()
     user = models.ForeignKey(User)
+    featured = models.BooleanField(default=False)
 
 

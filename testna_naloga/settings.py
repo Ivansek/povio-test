@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/1.8/ref/settings/
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 import os
+from datetime import timedelta
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
@@ -152,3 +153,14 @@ PIPELINE_JS = {
 }
 
 LOGIN_REDIRECT_URL = '/'
+
+CELERYBEAT_SCHEDULE = {
+    'featured-every-30-seconds': {
+        'task': 'blog.tasks.mark_featured',
+        'schedule': timedelta(seconds=60)
+    },
+}
+REDIS_URL="redis://"
+BROKER_URL=REDIS_URL
+CELERY_RESULT_BACKEND=REDIS_URL
+CELERY_TIMEZONE = 'Europe/Ljubljana'

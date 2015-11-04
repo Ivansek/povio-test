@@ -1,13 +1,20 @@
 {% extends 'blog/base.html' %}
 
 {% block base_content%}
-<div class="container" ng-controller="IndexController">
-    <div ng-repeat="post in posts">
+<div ng-controller="IndexController">
+    <h2>Blog posts</h2>
+    <div ng-repeat="post in posts" ng-class="{'featured': post.featured}">
         {% verbatim %}
-        <strong>{{ post.title }}</strong> - by {{ post.user }}
+        <strong>{{ post.title }}</strong> - by {{ post.user.username }}
         <p>{{ post.description }}</p>
         {% endverbatim %}
+        {% if user.is_authenticated %}
+        <div>
+            <button class="btn btn-danger" ng-click="delete(post)">Delete</button>
+        </div>
+        {% endif %}
         <hr/>
     </div>
+    <div ng-show="posts.length == 0">No posts</div>
 </div>
 {% endblock %}

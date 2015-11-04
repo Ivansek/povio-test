@@ -7,11 +7,17 @@ from models import Post
 
 
 class PostViewSet(viewsets.ModelViewSet):
+    """
+    ViewSet for blog post
+    """
     queryset = Post.objects.all()
     serializer_class = PostSerializer
     authentication_classes = (SessionAuthentication, BasicAuthentication)
 
     def create(self, request, *args, **kwargs):
+        """
+        Override create method in order to add user in serializer
+        """
         data = request.data
         data['user'] = request.user.pk
 
@@ -25,4 +31,3 @@ class PostViewSet(viewsets.ModelViewSet):
             )
             return Response(serializer.data, status=200)
         return Response(serializer.errors, status=500)
-
