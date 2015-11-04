@@ -22,16 +22,15 @@ blogController.controller('IndexController', function($scope, $http){
 blogController.controller('NewPostController', function($scope, $http){
     $scope.formData = {}
     $scope.processForm = function(){
-        $scope.submitted = true
 
         $http.post('/api/post/', $scope.formData)
             .success(function(data){
-                $scope.is_error = false
+                $scope.success = true
+                $scope.errors = {}
                 $scope.status = 'Your post was successfully saved!'
                 $scope.formData = {}
             })
             .error(function(data){
-                $scope.is_error = true
                 $scope.errors = data
             })
     }

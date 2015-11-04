@@ -2,7 +2,7 @@
 {% block base_content %}
 {% if user.is_authenticated %}
 <div ng-controller="NewPostController">
-    <div ng-show="!is_error && submitted" ng-class="{'alert alert-success': !is_error && submitted}">New post saved!</div>
+    <div ng-show="success" ng-class="{'alert alert-success': success}">New post saved!</div>
     <form ng-submit="processForm()">
         <div class="form-group">
             <label>Title</title>
