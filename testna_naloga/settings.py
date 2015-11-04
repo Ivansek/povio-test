@@ -11,7 +11,7 @@ https://docs.djangoproject.com/en/1.8/ref/settings/
 """
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
-import os
+import os,sys
 from datetime import timedelta
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -29,6 +29,10 @@ DEBUG = True
 ALLOWED_HOSTS = []
 
 
+
+ADMINS = (
+    ('Simon Ivansek', 'simon.ivansek@gmail.com')
+)
 # Application definition
 
 INSTALLED_APPS = (
@@ -166,7 +170,7 @@ CELERY_RESULT_BACKEND=REDIS_URL
 CELERY_TIMEZONE = 'Europe/Ljubljana'
 
 # Parse database configuration from $DATABASE_URL
-if not os.environ['LOCAL_DEV']:
+if hasattr(os.environ, 'LOCAL_DEV') and not os.environ['LOCAL_DEV']:
     import dj_database_url
     DATABASES['default'] =  dj_database_url.config()
 
@@ -176,17 +180,13 @@ SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 # Allow all host headers
 ALLOWED_HOSTS = ['*']
 
-import sys
-LOGGING = {
-    'handlers': {
-        'console':{
-            'level':'INFO',
-            'class':'logging.StreamHandler',
-            'strem': sys.stdout
-        },
-    }
-}
 
-ADMINS = (
-    ('Simon Ivansek', 'simon.ivansek@gmail.com')
-)
+# LOGGING = {
+#     'handlers': {
+#         'console':{
+#             'level':'INFO',
+#             'class':'logging.StreamHandler',
+#             'strm': sys.stdout
+#         }
+#     }
+# }
