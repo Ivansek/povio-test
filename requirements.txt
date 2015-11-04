@@ -18,5 +18,6 @@ gunicorn==19.3.0
 kombu==3.0.29
 psycopg2==2.6.1
 pytz==2015.7
+redis==2.10.5
 static3==0.6.1
 wsgiref==0.1.2
