@@ -24,11 +24,11 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = 'yos#swt^3%gno)*boj=3tsgk2d&*g%!dset@tg0dlnuy8r5mya'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
+if 'LOCAL_DEV' in os.environ:
+    DEBUG = True
 
 ALLOWED_HOSTS = []
-
-
 
 ADMINS = (
     ('Simon Ivansek', 'simon.ivansek@gmail.com')
