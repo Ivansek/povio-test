@@ -2,17 +2,17 @@
 {% block base_content %}
 {% if user.is_authenticated %}
 <div ng-controller="NewPostController">
-    <div ng-show="!is_error && submitted" ng-class="alert alert-success">New post saved!</div>
+    <div ng-show="!is_error && submitted" ng-class="{'alert alert-success': !is_error && submitted}">New post saved!</div>
     <form ng-submit="processForm()">
         <div class="form-group">
             <label>Title</title>
             <input class="form-control" type="text" name="title" ng-model="formData.title">
-            <span ng-bind="errors['title']"></span>
+            <div ng-class="{'text-danger': errors['title']}" ng-bind="errors['title']"></div>
         </div>
         <div class="form-group">
             <label>Description</title>
             <textarea class="form-control" name="description" ng-model="formData.description"></textarea>
-            <div ng-class="{'alert alert-warning': errors['description']}" ng-bind="errors['description']"></div>
+            <div ng-class="{'text-danger': errors['description']}" ng-bind="errors['description']"></div>
         </div>
         <div class="form-group">
             <input class="btn btn-primary" type="submit">

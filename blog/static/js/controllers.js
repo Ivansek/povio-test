@@ -23,6 +23,7 @@ blogController.controller('NewPostController', function($scope, $http){
     $scope.formData = {}
     $scope.processForm = function(){
         $scope.submitted = true
+
         $http.post('/api/post/', $scope.formData)
             .success(function(data){
                 $scope.is_error = false
